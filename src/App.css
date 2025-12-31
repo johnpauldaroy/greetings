@@ -1,0 +1,418 @@
+.App {
+  min-height: 100vh;
+  color: #f8f3ff;
+  font-family: 'Manrope', sans-serif;
+}
+
+.sky {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 4.5rem 1.5rem 5rem;
+  text-align: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 200, 120, 0.18), transparent 45%),
+    radial-gradient(circle at 80% 15%, rgba(140, 200, 255, 0.2), transparent 40%),
+    radial-gradient(circle at 70% 80%, rgba(255, 140, 180, 0.2), transparent 50%),
+    linear-gradient(160deg, #0b0c2b 0%, #111235 45%, #08090f 100%);
+}
+
+.sky::before,
+.sky::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.18;
+  filter: blur(0px);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9), transparent 70%);
+}
+
+.sky::before {
+  width: 280px;
+  height: 280px;
+  top: -80px;
+  left: -60px;
+}
+
+.sky::after {
+  width: 220px;
+  height: 220px;
+  bottom: -60px;
+  right: -40px;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  padding: 2.5rem 2rem;
+  border-radius: 28px;
+  background: rgba(8, 10, 22, 0.65);
+  box-shadow: 0 24px 60px rgba(3, 6, 20, 0.45);
+  backdrop-filter: blur(10px);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 1.2rem;
+  animation: rise-in 0.9s ease-out both;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.6rem, 6vw, 4.8rem);
+  margin: 0 0 1rem;
+  text-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  animation: glow-in 1.1s ease-out 0.15s both, year-pulse 1s ease-in-out 1.3s infinite;
+}
+
+.subtitle {
+  font-size: clamp(1rem, 2.4vw, 1.4rem);
+  line-height: 1.6;
+  margin: 0 auto 2.2rem;
+  color: rgba(248, 243, 255, 0.85);
+  animation: rise-in 1s ease-out 0.35s both;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+  animation: rise-in 1s ease-out 0.5s both;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.launch-button {
+  border: none;
+  padding: 0.9rem 2.3rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0a0c18;
+  background: linear-gradient(120deg, #ffd46e, #ff9f8b, #aee6ff);
+  box-shadow: 0 16px 30px rgba(255, 180, 120, 0.35);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: pulse 2.8s ease-in-out infinite;
+}
+
+.launch-button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(255, 190, 140, 0.45);
+}
+
+.launch-button.secondary {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+
+.launch-button.secondary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 16px 30px rgba(255, 255, 255, 0.2);
+}
+
+.hint {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.gallery {
+  position: relative;
+  z-index: 2;
+  width: min(1100px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.gallery-title {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.gallery-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.photo-card {
+  margin: 0;
+  padding: 0.6rem;
+  border-radius: 18px;
+  background: rgba(9, 12, 25, 0.6);
+  box-shadow: 0 18px 40px rgba(4, 7, 18, 0.4);
+  backdrop-filter: blur(6px);
+}
+
+.photo-card img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+  animation: photo-float 6s ease-in-out infinite;
+}
+
+.photo-card {
+  width: 100%;
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -10%;
+  width: var(--size);
+  height: calc(var(--size) * 1.6);
+  background: hsl(var(--hue) 90% 65%);
+  opacity: 0.85;
+  border-radius: 2px;
+  animation: confetti-fall var(--duration) linear infinite;
+  animation-delay: var(--delay);
+  transform: rotate(12deg);
+}
+
+.firework {
+  position: absolute;
+  z-index: 1;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(calc(0.25 * var(--scale, 1)));
+  opacity: 0;
+  background: hsl(var(--hue) 90% 70%);
+  box-shadow:
+    0 -32px hsl(var(--hue) 90% 65%),
+    22px -22px hsl(calc(var(--hue) + 30) 90% 65%),
+    32px 0 hsl(calc(var(--hue) + 60) 90% 62%),
+    22px 22px hsl(calc(var(--hue) + 90) 90% 65%),
+    0 32px hsl(calc(var(--hue) + 120) 90% 62%),
+    -22px 22px hsl(calc(var(--hue) + 150) 90% 65%),
+    -32px 0 hsl(calc(var(--hue) + 180) 90% 62%),
+    -22px -22px hsl(calc(var(--hue) + 210) 90% 65%),
+    12px -30px hsl(calc(var(--hue) + 240) 90% 70%),
+    30px -12px hsl(calc(var(--hue) + 270) 90% 70%),
+    30px 12px hsl(calc(var(--hue) + 300) 90% 70%),
+    12px 30px hsl(calc(var(--hue) + 330) 90% 70%);
+  animation: firework-explode 1.35s ease-out forwards;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.55));
+}
+
+.firework::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9), transparent 60%);
+  opacity: 0.5;
+}
+
+@keyframes firework-explode {
+  0% {
+    transform: translate(-50%, -50%) scale(calc(0.25 * var(--scale, 1)));
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(calc(1.55 * var(--scale, 1)));
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.03);
+  }
+}
+
+@keyframes rise-in {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow-in {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.98);
+    text-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    text-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  }
+}
+
+@keyframes year-pulse {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    text-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  }
+  50% {
+    transform: translateY(-2px) scale(1.02);
+    text-shadow: 0 16px 36px rgba(255, 255, 255, 0.25);
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(120%) rotate(360deg);
+  }
+}
+
+@keyframes photo-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.02);
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 7, 16, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  padding: 2rem 1.5rem;
+}
+
+.modal {
+  position: relative;
+  width: min(1100px, 100%);
+  max-height: 90vh;
+  overflow: hidden;
+  border-radius: 24px;
+  background: rgba(8, 10, 22, 0.95);
+  box-shadow: 0 30px 70px rgba(4, 7, 18, 0.55);
+  padding: 3.5rem 2rem 2.5rem;
+}
+
+.modal-fireworks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.modal-content {
+  position: relative;
+  z-index: 1;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@media (max-width: 640px) {
+  .content {
+    padding: 2rem 1.5rem;
+  }
+
+  .eyebrow {
+    letter-spacing: 0.2em;
+  }
+
+  .gallery-grid {
+    max-width: 100%;
+  }
+
+  .modal {
+    padding: 3rem 1.2rem 2rem;
+  }
+
+  .modal-close {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .launch-button {
+    animation: none;
+  }
+
+  .firework {
+    animation: none;
+    opacity: 0.75;
+  }
+
+  .confetti-piece {
+    animation: none;
+  }
+
+  .photo-card img {
+    animation: none;
+  }
+
+  .eyebrow,
+  .title,
+  .subtitle,
+  .actions {
+    animation: none;
+  }
+}
