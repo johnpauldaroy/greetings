@@ -350,6 +350,9 @@
 .modal-content {
   position: relative;
   z-index: 1;
+  max-height: calc(90vh - 5.5rem);
+  overflow-y: auto;
+  padding-right: 0.5rem;
 }
 
 .modal-close {
@@ -378,7 +381,8 @@
   }
 
   .gallery-grid {
-    max-width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 520px;
   }
 
   .modal {
@@ -388,6 +392,20 @@
   .modal-close {
     top: 0.75rem;
     right: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    max-width: 100%;
+  }
+
+  .modal-content {
+    max-height: calc(90vh - 6rem);
+  }
+
+  .photo-card img {
+    aspect-ratio: 3 / 4;
   }
 }
 
